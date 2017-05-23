@@ -37,7 +37,7 @@ class Chrome(Instagram):
             pass
         else:
             try:
-                import pdb;pdb.set_trace()
+                #import pdb;pdb.set_trace()
                 options = webdriver.ChromeOptions();
                 options.add_argument("--disable-extensions");
                 options.add_argument("test-type");
