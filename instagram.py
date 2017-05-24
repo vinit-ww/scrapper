@@ -1,6 +1,10 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
+<<<<<<< HEAD
 import time
+=======
+
+>>>>>>> 98f672f6e88530f794a568cb350ff2ba9f7e8079
 
 class InstagramScraper():
 	base_url = "https://www.instagram.com/"
