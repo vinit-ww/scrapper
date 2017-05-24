@@ -1,7 +1,6 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
-from time import sleep
-
+import time
 
 class InstagramScraper():
 	base_url = "https://www.instagram.com/"
@@ -21,11 +20,26 @@ class InstagramScraper():
 		driver.get(link)
 		return driver
 
+	def scroll_page(self):
+		driver_obj = self.make_request()
+		driver_obj.find_element_by_link_text('Load more').click()
+                lastHeight = driver_obj.execute_script("return document.body.scrollHeight")
+		while True:
+                	driver_obj.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                	time.sleep(1)
+                	newHeight = driver_obj.execute_script("return document.body.scrollHeight")
+                	if newHeight == lastHeight:
+                        	break
+                	lastHeight = newHeight
+                html_source = driver_obj.page_source
+		return html_source
+			
+		
+		
 	def parse_posts(self):
-		posts = self.make_request()
-		posts_parse = posts.page_source
+		posts_parse = self.scroll_page()
 		soup_object = BeautifulSoup(posts_parse)
-                link_posts = [x['src'] for x in soup_object.findAll('img')]
+                link_posts = [x for x in soup_object.findAll('img')]
                 return link_posts
 
 instagram_scrapper = InstagramScraper("priyankachopra")
