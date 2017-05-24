@@ -34,8 +34,6 @@ class InstagramScraper():
                 html_source = driver_obj.page_source
 		return html_source
 			
-		
-		
 	def parse_posts(self):
 		posts_parse = self.scroll_page()
 		soup_object = BeautifulSoup(posts_parse)
@@ -44,7 +42,3 @@ class InstagramScraper():
 
 instagram_scrapper = InstagramScraper("priyankachopra")
 print(instagram_scrapper.parse_posts())
-
-	
-	
-
